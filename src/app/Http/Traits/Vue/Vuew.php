@@ -112,6 +112,18 @@ trait Vuew
     }
 
     /**
+     * Permite añadir la ruta raíz o verla
+     * 
+     * @param string $root Raiz escrita en el formato blade
+     * 
+     * @return void
+     */
+    public function vueRoot($root) : void
+    {
+        $this->vueView = $root;
+    }
+
+    /**
      * Obtiene todos las datos independientemente desde donde se allan registrado
      * 
      * @return array
