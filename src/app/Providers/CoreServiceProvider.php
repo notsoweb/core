@@ -1,4 +1,4 @@
-<?php namespace Notsoweb\Author\Providers;
+<?php namespace Notsoweb\Core\Providers;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
