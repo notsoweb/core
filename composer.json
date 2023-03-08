@@ -1,0 +1,23 @@
+{
+    "name": "notsoweb/core",
+    "description": "Núcleo de funciones para VUEJS y LIVEWIRE diseñado como complemento para Laravel Jetstream.",
+    "type": "library",
+    "homepage": "https://notsoweb.com",
+    "require": {
+        "php": "^8.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Notsoweb\\Core\\": "src/app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Moisés de Jesús Cortés Castellanos",
+            "email": "ing.moisesdejesuscortesc@notsoweb.com",
+            "homepage": "https://notsoweb.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
