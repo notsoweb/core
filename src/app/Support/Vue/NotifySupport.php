@@ -1,4 +1,4 @@
-<?php namespace App\Support\Vue;
+<?php namespace Notsoweb\Core\Support\Vue;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
