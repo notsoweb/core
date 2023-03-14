@@ -21,6 +21,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->config();
         
     }
 
@@ -32,5 +33,15 @@ class CoreServiceProvider extends ServiceProvider
     public function boot()
     {
         
+    }
+
+    /**
+     * Fusiona las configuraciones
+     */
+    private function config()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../../config/logging/channels.php', 'logging.channels'
+        );
     }
 }
