@@ -1,4 +1,4 @@
-<?php namespace Notsoweb\Core\Traits\Models;
+<?php namespace Notsoweb\Core\Http\Traits\Models;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
