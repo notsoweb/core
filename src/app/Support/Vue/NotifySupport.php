@@ -29,7 +29,7 @@ class NotifySupport
      * Importante: No usar junto a los formularios.
      * 
      * @param string $message Mensaje de error
-     * @param string $varName Variable que se recibira en el front para el error
+     * @param string $varName Variable que se recibirá en el front para el error
      */
     public static function error($message) : void
     {
@@ -56,7 +56,7 @@ class NotifySupport
      * Importante: No usar junto a los formularios.
      * 
      * @param string $message Mensaje de advertencia
-     * @param string $varName Variable que se recibira en el front para el error
+     * @param string $varName Variable que se recibirá en el front para el error
      */
     public static function warning($message) : void
     {

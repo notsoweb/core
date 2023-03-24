@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
  * 
  * @version 1.0.0
  */
-class UserSecure
+class UserSecureSupport
 {
     /**
      * Canal donde se guarda el registro
@@ -29,7 +29,7 @@ class UserSecure
      * 
      * Permite generar una contraseña para cualquier usuario, pero registra la contraseña en un log.
      * 
-     * Esto tiene la finalidad de que las contraseñas generadas en los proyectos sean unicas y que
+     * Esto tiene la finalidad de que las contraseñas generadas en los proyectos sean únicas y que
      * no queden plasmadas en el código.
      * 
      * @param string $email Correo
