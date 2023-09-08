@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Permission;
  /**
  * Permite facilitar el sembrado de permisos
  * 
+ * Requiere el paquete Spatie\Permission.
+ * 
  * @author Moisés de Jesús Cortés Castellanos <ing.moisesdejesuscortesc@notsoweb.com>
  * 
  * @version 1.0.0
@@ -16,8 +18,6 @@ trait RolePermission
 {
     /**
      * Permite crear un permiso arbitrario
-     * 
-     * Requiere el paquete Spatie\Permission
      * 
      * @param string $code Código del permiso que será usado para programar
      * @param string $description Descripción del permiso
