@@ -12,7 +12,7 @@
             "Notsoweb\\Core\\": "src/app"
         },
         "files": [
-            "app/Helpers/Notsoweb.php"
+            "src/app/Helpers/Notsoweb.php"
         ]
     },
     "authors": [
