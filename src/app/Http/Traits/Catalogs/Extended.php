@@ -1,4 +1,4 @@
-<?php namespace Notsoweb\Core\App\Http\Traits\Catalogs;
+<?php namespace Notsoweb\Core\Http\Traits\Catalogs;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */

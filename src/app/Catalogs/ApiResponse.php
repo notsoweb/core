@@ -1,9 +1,9 @@
-<?php namespace NotSoWeb\Core\App\Catalogs;
+<?php namespace NotSoWeb\Core\Catalogs;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
 
-use Notsoweb\Core\App\Http\Traits\Catalogs\Extended;
+use Notsoweb\Core\Http\Traits\Catalogs\Extended;
 
  /**
  * Respuestas estándar para APIs
