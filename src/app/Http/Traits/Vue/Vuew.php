@@ -1,6 +1,6 @@
 <?php namespace Notsoweb\Core\Http\Traits\Vue;
 /**
- * @copyright Copyright (c) 2022 Notsoweb (https://notsoweb.com) - All rights reserved.
+ * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
 
 use Inertia\Inertia;
@@ -12,12 +12,17 @@ use Inertia\Response;
  * 
  * @author Moisés de Jesús Cortés Castellanos <ing.moisesdejesuscortesc@notsoweb.com>
  * 
- * @version 1.0.0
+ * @version 1.0.1
  */
 trait Vuew
 {
     /**
-     * Datos que son agregados por otros operadores que seran enviados
+     * Raíz de las vistas
+     */
+    protected $vueRoot = '';
+
+    /**
+     * Datos que son agregados por otros operadores que serán enviados
      * a la vista de vue.
      */
     protected $otherData = [];
@@ -27,7 +32,7 @@ trait Vuew
      */
     public function vuew($view, $data = []) : Response
     {
-        $route = (isset($this->vueView))
+        $route = (!empty($this->vueRoot))
             ? $this->withRootRoute($view)
             : $this->stringToViewFormat($view);
 
@@ -40,8 +45,8 @@ trait Vuew
     /**
      * Convierte vista blade a formato vue de inertia
      * 
-     * Convierte los puntos y palabras en minusculas en diagonales
-     * y palabras que comienzan su primer letra en mayuscula.
+     * Convierte los puntos y palabras en minúsculas en diagonales
+     * y palabras que comienzan su primer letra en mayúscula.
      * 
      * @param string $route Ruta
      */
@@ -60,9 +65,9 @@ trait Vuew
     /**
      * Convierte vista al formato de vue de inertia
      * 
-     * Transforma las palabras con guiones segun el estandar de Blade
+     * Transforma las palabras con guiones según el estándar de Blade
      * para vistas conformadas por varias palabras a palabras juntas
-     * iniciando con mayusculas usadas en Vue.
+     * iniciando con mayúsculas usadas en Vue.
      * 
      * @param string $string String a transformar
      * 
@@ -81,9 +86,9 @@ trait Vuew
     }
 
     /**
-     * Con una ruta Raiz
+     * Con una ruta Raíz
      * 
-     * Transforma la vista raíz y despues la añade a la vista.
+     * Transforma la vista raíz y después la añade a la vista.
      * 
      * @param string $view Vista a transformar
      * 
@@ -91,15 +96,16 @@ trait Vuew
      */
     private function withRootRoute($view) : string
     {
-        $root = $this->stringToViewFormat($this->vueView);
+        $root = $this->stringToViewFormat($this->vueRoot);
+        $view = $this->stringToViewFormat($view);
 
-        return $root.'/'.$this->toBladeFormat($view);
+        return $root.'/'.$view;
     }
 
     /**
      * Agrega otros datos
      * 
-     * Es usado cuando en multiples funciones envian recurrente un mismo dato
+     * Es usado cuando en multiples funciones envían recurrente un mismo dato
      * en el mismo controlador.
      * 
      * @param array $data Datos a enviar
@@ -114,17 +120,17 @@ trait Vuew
     /**
      * Permite añadir la ruta raíz o verla
      * 
-     * @param string $root Raiz escrita en el formato blade
+     * @param string $root Raíz escrita en el formato blade
      * 
      * @return void
      */
     public function vueRoot($root) : void
     {
-        $this->vueView = $root;
+        $this->vueRoot = $root;
     }
 
     /**
-     * Obtiene todos las datos independientemente desde donde se allan registrado
+     * Obtiene todos las datos independientemente desde donde se hallan registrado
      * 
      * @return array
      */
