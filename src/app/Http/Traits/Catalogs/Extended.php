@@ -8,25 +8,36 @@
  * 
  * @author Moisés de Jesús Cortés Castellanos <ing.moisesdejesuscortesc@notsoweb.com>
  * 
- * @version 1.0.0
+ * @version 1.0.1
  */
 trait Extended
 {
     /**
      * Obtener todos los registros en un array
      * 
-     * Regresa los registros de la forma valor descripción. Requiere de la existencia de la función
-     * description() con el match de las descripciones.
+     * Regresa los registros de la forma valor descripción. Requiere la existencia de la función
+     * asModel() que retorna un array con los datos de una instancia.
      */
     public static function all()
     {
         $cases = static::cases();
-        $items = [];
+        $models = [];
 
         foreach ($cases as $case) {
-            $items[$case->value] = $case->description();
+            $models[] = $case->asModel();
         }
 
-        return $items;
+        return $models;
     }
+
+    /**
+     * Ejemplo de la función asModel;
+     */
+    // public function asModel() : array
+    // {
+    //     return [
+    //         'id' => $this->value,
+    //         'name' => $this->name
+    //     ];
+    // }
 }
