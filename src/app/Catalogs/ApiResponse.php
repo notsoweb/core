@@ -1,4 +1,4 @@
-<?php namespace NotSoWeb\Core\Catalogs;
+<?php namespace Notsoweb\Core\Catalogs;
 /**
  * @copyright Copyright (c) 2023 Notsoweb (https://notsoweb.com) - All rights reserved.
  */
