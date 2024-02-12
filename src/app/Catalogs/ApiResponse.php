@@ -8,6 +8,10 @@ use Notsoweb\Core\Http\Traits\Catalogs\Extended;
  /**
  * Respuestas estándar para APIs
  * 
+ * Esta basado en el estándar JSend
+ * 
+ * @see https://github.com/omniti-labs/jsend
+ * 
  * @author Moisés de Jesús Cortés Castellanos <ing.moisesdejesuscortesc@notsoweb.com>
  * 
  * @version 1.0.0
@@ -92,6 +96,28 @@ enum ApiResponse : int
      * Se ha producido un error interno en el servidor.
      */
     case INTERNAL_ERROR = 500;
+    
+    /**
+     * Estado de éxito
+     * 
+     * Todo va bien y (normalmente) se devuelve algún datos.
+     */
+    const SUCCESS = 'success';
+
+    /**
+     * Estado de éxito
+     * 
+     * Ha habido un problema con los datos enviados o no se ha cumplido alguna condición
+     * previa de la llamada a la API.
+     */
+    const FAIL = 'fail';
+
+    /**
+     * Estado de éxito
+     * 
+     * Se ha producido un error al procesar la solicitud, es decir, se ha lanzado una excepción.
+     */
+    const ERROR = 'error';
 
     /**
      * Descripción general del tipo de respuesta
@@ -115,46 +141,61 @@ enum ApiResponse : int
     }
 
     /**
-     * Respuesta simple
-     * 
-     * Respuesta genérica.
+     * Descripción general del tipo de respuesta
      */
-    public function simpleResponse() : array
+    public function status()
     {
-        return [
-            'code' => $this->value,
-            'message' => $this->description(),
-            'data' => null
-        ];
+        return match($this) {
+            self::OK => self::SUCCESS,
+            self::CREATED => self::SUCCESS,
+            self::NO_CONTENT => self::SUCCESS,
+            self::BAD_REQUEST => self::FAIL,
+            self::UNAUTHORIZED => self::FAIL,
+            self::FORBIDDEN => self::ERROR,
+            self::NOT_FOUND => self::ERROR,
+            self::METHOD_NOT_ALLOWED => self::FAIL,
+            self::NOT_ACCEPTABLE => self::FAIL,
+            self::CONFLICT => self::FAIL,
+            self::UNSUPPORTED_MEDIA_TYPE => self::FAIL,
+            self::INTERNAL_ERROR => self::ERROR,
+        };
     }
 
     /**
-     * Respuesta con un detalle más especifico
-     * 
-     * Envía una respuesta más detallada sin necesidad de retornar más datos que el detalle.
+     * Mensaje en caso de error
      */
-    public function detailResponse(string $message = null) : array
+    public function onSuccess(array $data = [])
     {
-        return [
-            'code' => $this->value,
-            'message' => $this->description(),
-            'data' => [
-                'detail' => $message
-            ]
-        ];
+        return response()->json([
+            'status' => $this->status(),
+            'data' => (!empty($data))
+                ? $data
+                : null,
+        ], $this->value);
     }
 
     /**
-     * Respuesta con datos
-     * 
-     * Permite retornar recursos variados como respuesta
+     * Mensaje describiendo porque fallo la solicitud
      */
-    public function response(array $data = []) : array
+    public function onFail(array $data = [])
     {
-        return [
-            'code' => $this->value,
+        return response()->json([
+            'status' => $this->status(),
+            'data' => $data
+        ], $this->value);
+    }
+
+    /**
+     * Mensaje en caso de error
+     */
+    public function onError(array $data = [])
+    {
+        return response()->json([
+            'status' => $this->status(),
             'message' => $this->description(),
-            'data' => $data,
-        ];
+            'data' => (!empty($data))
+                ? $data
+                : null,
+        ], $this->value);
     }
 }
