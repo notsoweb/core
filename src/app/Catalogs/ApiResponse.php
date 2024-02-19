@@ -93,6 +93,12 @@ enum ApiResponse : int
     case UNSUPPORTED_MEDIA_TYPE = 415;
 
     /**
+     * El recurso de destino no admite el formato de datos del cuerpo de la solicitud especificado
+     * en la cabecera de Content-Type.
+     */
+    case UNPROCESSABLE_CONTENT = 422;
+
+    /**
      * Se ha producido un error interno en el servidor.
      */
     case INTERNAL_ERROR = 500;
@@ -136,6 +142,7 @@ enum ApiResponse : int
             self::NOT_ACCEPTABLE => 'Formato de solicitud no valido',
             self::CONFLICT => 'Actualización de recurso conflictiva.',
             self::UNSUPPORTED_MEDIA_TYPE => 'Formato de respuesta solicitado invalido.',
+            self::UNPROCESSABLE_CONTENT => 'Contenido no procesable.',
             self::INTERNAL_ERROR => 'Error interno.',
         };
     }
@@ -157,6 +164,7 @@ enum ApiResponse : int
             self::NOT_ACCEPTABLE => self::FAIL,
             self::CONFLICT => self::FAIL,
             self::UNSUPPORTED_MEDIA_TYPE => self::FAIL,
+            self::UNPROCESSABLE_CONTENT => self::ERROR,
             self::INTERNAL_ERROR => self::ERROR,
         };
     }
@@ -193,7 +201,7 @@ enum ApiResponse : int
         return response()->json([
             'status' => $this->status(),
             'message' => $this->description(),
-            'data' => (!empty($data))
+            'errors' => (!empty($data))
                 ? $data
                 : null,
         ], $this->value);
