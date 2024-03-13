@@ -31,13 +31,19 @@ trait Extended
     }
 
     /**
-     * Ejemplo de la función asModel;
+     * Obtener todos los registros en un array excepto el pasado
      */
-    // public function asModel() : array
-    // {
-    //     return [
-    //         'id' => $this->value,
-    //         'name' => $this->name
-    //     ];
-    // }
+    public static function allExcept($key)
+    {
+        $cases = static::cases();
+        $models = [];
+
+        foreach ($cases as $case) {
+            if($case != $key){
+                $models[] = $case->asModel();
+            }
+        }
+
+        return $models;
+    }
 }
